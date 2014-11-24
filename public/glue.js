@@ -14,7 +14,7 @@ $(document).ready(function ($) {
 		ss(socket).emit('new', stream, data);
 
 		// Connect everything up
-		stream.pipe(term).dom(this).pipe(stream)
+		stream.pipe(term).dom(this).pipe(stream);
 
 		// Write text to terminal
 		stream.write(text);
