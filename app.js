@@ -4,19 +4,20 @@ var http = require('http'),
     child_pty = require('child_pty'),
     ss = require('socket.io-stream');
 
-process.config = require('./config.json');
+var config = require('./config.json');
 
 var server = http.createServer()
-	.on('request', function(req, res) {
+	.listen(config.port, config.interface);
+
+var ptys = {};
+
+server.on('request', function(req, res) {
 		var file = null;
 		console.log(req.url);
 		switch(req.url) {
 		case '/':
 		case '/index.html':
-			file = '/public/index.html';
-			break;
-		case '/glue.js':
-			file = '/public/glue.js';
+			file = '/index.html';
 			break;
 		case '/terminal.js':
 			file = '/node_modules/terminal.js/dist/terminal.js';
@@ -30,28 +31,32 @@ var server = http.createServer()
 			return;
 		}
 		fs.createReadStream(__dirname + file).pipe(res);
-	})
-	.listen(process.config.port, process.config.interface);
+	});
 
-var io = socketio(server);
-
-io.of('pty').on('connection', function(socket) {
-	var ptys = {};
-
+socketio(server).of('pty').on('connection', function(socket) {
+	// receives a bidirectional pipe from the client see public/glue.js
+	// for the client-side
 	ss(socket).on('new', function(stream, options) {
 		var name = options.name;
 
-		var pty = child_pty.spawn('/bin/sh', ['-c', process.config.login], {
-			rows: options.height,
-			cols: options.width,
-		});
+		var pty = child_pty.spawn('/bin/sh', ['-c', config.login], options);
 		pty.stdout.pipe(stream).pipe(pty.stdin);
 		ptys[name] = pty;
-	}).on('end', function(name) {
-		if(name in ptys === false) return;
-		ptys[name].kill();
-		delete ptys[name];
+		stream.on('close', function() {
+			console.log("end");
+			pty.kill();
+			delete ptys[name];
+		});
 	});
 });
 
-console.log('Listening on ' + process.config.interface + ':' + process.config.port);
+process.on('exit', function() {
+	var k = Object.keys(ptys);
+	var i;
+
+	for(i = 0; i < k.length; i++) {
+		ptys[k].kill();
+	}
+});
+
+console.log('Listening on ' + config.interface + ':' + config.port);
