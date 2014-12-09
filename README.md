@@ -1,7 +1,7 @@
 terminal.js-webshell
 ====================
 
-this is a demo application for child_pty and terminal.js.
+this is a demo application for [child_pty](https://github.com/Gottox/child_pty) and [terminal.js](https://github.com/Gottox/terminal.js).
 
 running this demo
 -----------------
