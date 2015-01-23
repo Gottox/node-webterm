@@ -12,7 +12,7 @@
     "child_pty": "^0.3.1",
     "socket.io": "^1.2.0",
     "socket.io-stream": "^0.6.0",
-    "terminal.js": "git://github.com/Gottox/terminal.js#refactorTermWriter"
+    "terminal.js": "^1.0.3"
   },
   "jshintConfig": {
     "eqeqeq": true,
