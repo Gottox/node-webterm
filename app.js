@@ -7,7 +7,7 @@ var http = require('http'),
 var config = require('./config.json');
 
 var server = http.createServer()
-	.listen(config.port, config.interface);
+	.listen(config.port);
 
 var ptys = {};
 
