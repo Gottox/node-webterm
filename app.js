@@ -34,7 +34,7 @@ server.on('request', function(req, res) {
 	});
 
 socketio(server).of('pty').on('connection', function(socket) {
-	// receives a bidirectional pipe from the client see public/glue.js
+	// receives a bidirectional pipe from the client see index.html
 	// for the client-side
 	ss(socket).on('new', function(stream, options) {
 		var name = options.name;
