@@ -42,9 +42,9 @@ socketio(server).of('pty').on('connection', function(socket) {
 		var pty = child_pty.spawn('/bin/sh', ['-c', config.login], options);
 		pty.stdout.pipe(stream).pipe(pty.stdin);
 		ptys[name] = pty;
-		stream.on('close', function() {
+		socket.on('disconnect', function() {
 			console.log("end");
-			pty.kill();
+			pty.kill('SIGHUP');
 			delete ptys[name];
 		});
 	});
@@ -55,7 +55,7 @@ process.on('exit', function() {
 	var i;
 
 	for(i = 0; i < k.length; i++) {
-		ptys[k].kill();
+		ptys[k].kill('SIGHUP');
 	}
 });
 
