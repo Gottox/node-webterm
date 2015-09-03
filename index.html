@@ -2,46 +2,39 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>index</title>
+		<title>Hack On</title>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="/socket.io-stream.js"></script>
 		<script src="/terminal.js"></script>
-		<style>
-.terminaljs {
-	background: black;
-	color: white;
-	font-family: Courier, monospace;
-	display:inline-block;
-}
-		</style>
+		<link rel="stylesheet" href="main.css">
 	</head>
 	<body>
 		<pre id="terminaljs" class="terminaljs" data-columns="80" data-rows="24"></pre>
 
 		<script>
-var containers = document.getElementsByClassName('terminaljs'),
-	socket = io(location.origin + '/pty'), term, stream;
-for(var i = 0; i < containers.length; i++) {
+		var containers = document.getElementsByClassName('terminaljs'),
+			socket = io(location.origin + '/pty'), term, stream;
+		for(var i = 0; i < containers.length; i++) {
 
-	// setting tabindex makes the element focusable
-	containers[i].tabindex = 0;
+			// setting tabindex makes the element focusable
+			containers[i].tabindex = 0;
 
-	// use data-* attributes to configure terminal and child_pty
-	term = new Terminal(containers[i].dataset);
+			// use data-* attributes to configure terminal and child_pty
+			term = new Terminal(containers[i].dataset);
 
-	// Create bidirectional stream
-	stream = ss.createStream({decodeStrings: false, encoding: 'utf-8'});
+			// Create bidirectional stream
+			stream = ss.createStream({decodeStrings: false, encoding: 'utf-8'});
 
-	// Send stream and options to the server
-	ss(socket).emit('new', stream, containers[i].dataset);
+			// Send stream and options to the server
+			ss(socket).emit('new', stream, containers[i].dataset);
 
-	// Connect everything up
-	stream.pipe(term).dom(containers[i]).pipe(stream);
-}
+			// Connect everything up
+			stream.pipe(term).dom(containers[i]).pipe(stream);
+		}
 
-window.onload = function(){
-	var input = document.getElementById("terminaljs").focus();
-}
+		window.onload = function(){
+			var input = document.getElementById("terminaljs").focus();
+		}
 		</script>
 	</body>
 </html>
