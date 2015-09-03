@@ -1,5 +1,5 @@
 {
-	"login": "echo \"Please don't use this in productive environments as all keystrokes are sent in plain text!\"; /bin/sh",
+	"login": "python yo.py",
 	"port": 3000,
 	"interface": "127.0.0.1"
 }
