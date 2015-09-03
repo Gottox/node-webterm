@@ -19,6 +19,9 @@ server.on('request', function(req, res) {
 		case '/index.html':
 			file = '/index.html';
 			break;
+        case '/favicon.ico':
+            file = '/favicon.ico';
+            break;
         case '/main.css':
             file = '/main.css';
             break;
