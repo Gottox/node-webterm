@@ -19,6 +19,9 @@ server.on('request', function(req, res) {
 		case '/index.html':
 			file = '/index.html';
 			break;
+        case '/main.css':
+            file = '/main.css';
+            break;
 		case '/terminal.js':
 			file = '/node_modules/terminal.js/dist/terminal.js';
 			break;
