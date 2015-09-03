@@ -7,9 +7,9 @@ import random
 hack_on = """
     __  __           __      ____        __
    / / / /___ ______/ /__   / __ \____  / /
-  / /_/ / __ `/ ___/ //_/  / / / / __ \/ / 
- / __  / /_/ / /__/ ,<    / /_/ / / / /_/  
-/_/ /_/\__,_/\___/_/|_|   \____/_/ /_(_)   
+  / /_/ / __ `/ ___/ //_/  / / / / __ \/ /
+ / __  / /_/ / /__/ ,<    / /_/ / / / /_/
+/_/ /_/\__,_/\___/_/|_|   \____/_/ /_(_)
 """
 
 def write_character(c):
@@ -19,12 +19,12 @@ def write_character(c):
 def write_words(words, speed_min=400, speed_max=650, speed_space=0.08):
     for character in words:
         if character == ' ':
-            time.sleep(speed_space) 
+            time.sleep(speed_space)
         write_character(character)
         sleeptime = random.randrange(speed_min, speed_max)
         time.sleep(float(sleeptime)/10000.0)
 
-write_words("Welcome USC Hacker. You are invited to come to our Hacker Orientation on 9/10.")
+write_words("Welcome, USC Hacker. You are invited to come to our Hacker Orientation on 9/10.")
 
 write_words("\n\nT-Shirts.")
 time.sleep(0.6)

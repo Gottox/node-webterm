@@ -1,10 +1,40 @@
-body {
-    
+html, body {
+    height: 100%;
 }
-
+body {
+    margin: 0; padding: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #343944;
+    background-position: center;
+    background-size: cover;
+}
+.frame {
+    margin: 0 20px;
+    min-width: 810px;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.titlebar {
+    height: 28px;
+    line-height: 28px;
+    font-family: sans-serif;
+    background: #E8E8E8;
+    color: #4E4E4E;
+}
 .terminaljs {
+    margin: 0; padding: 20px;
+    display:inline-block;
+    font-family: Courier, monospace;
+    text-align: left;
     background: black;
     color: white;
-    font-family: Courier, monospace;
-    display:inline-block;
+}
+.terminaljs:focus {
+    outline: none;
 }
