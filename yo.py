@@ -3,6 +3,7 @@
 import sys
 import time
 import random
+import re
 
 hack_on = """
     __  __           __      ____        __
@@ -38,16 +39,37 @@ time.sleep(0.6)
 write_words(" Enter your full name: ")
 
 name = raw_input('')
+name = name.strip()
+
+while len(name) < 2 or len(name) > 80:
+    write_words("Whoops! Please make sure your name is more than a character and less than 80 characters.\n")
+    write_words("Enter your full name: ")
+    name = raw_input('')
+    name = name.strip()
 
 write_words("And your usc email: ")
 
+email_regex = re.compile('^[a-z+\.]+\@usc\.edu$')
+
 email = raw_input('')
+email = email.strip()
+
+while email_regex.match(email) is None:
+    write_words("Whoops! Please make sure your email is a valid @usc.edu email.\n")
+    write_words("Enter your usc email: ")
+    email = raw_input('')
+    email = email.strip()
+
+
+with open('output.txt', 'a') as f:
+    f.write(name.replace(',', '')+','+email.replace(',', '')+','+str(time.time())+'\n')
+
+write_words("We'll see you at 6:30 on 9/10 in the Annenberg West Lobby!")
 
 write_words(hack_on, speed_min=10, speed_max=15, speed_space=0.001)
 
-with open('output.txt', 'a') as f:
-    f.write(name+','+email+'\n')
+time.sleep(1.5)
 
-time.sleep(9999999)
+write_words(';)')
 
 sys.exit(0)
