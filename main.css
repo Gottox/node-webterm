@@ -12,7 +12,6 @@ body {
     background-size: cover;
 }
 .frame {
-    margin: 0 20px;
     min-width: 810px;
     display: inline-block;
     position: relative;
@@ -23,9 +22,35 @@ body {
 .titlebar {
     height: 28px;
     line-height: 28px;
+    text-align: left;
     font-family: sans-serif;
     background: #E8E8E8;
     color: #4E4E4E;
+}
+.titlebar .circle {
+    margin-left: 5px;
+    height: 16px; width: 16px;
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    vertical-align: middle;
+    border-radius: 999999px;
+}
+.red {
+    background: #FC605B;
+}
+.yellow {
+    background: #FDBC40;
+}
+.green {
+    background: #33C748;
+}
+.title {
+    width: 200px;
+    margin: 0 auto;
+    position: absolute;
+    top: 0; right: 0; left: 0;
+    text-align: center;
 }
 .terminaljs {
     margin: 0; padding: 20px;
