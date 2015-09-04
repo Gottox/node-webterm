@@ -62,7 +62,7 @@ while email_regex.match(email) is None:
 
 
 with open('output.txt', 'a') as f:
-    f.write(name.replace(',', '')+','+email.replace(',', '')+','+str(time.time())+'\n')
+    f.write(name.replace(',', '')+','+email.replace(',', '')+','+str(time.time())+',false'+'\n')
 
 write_words("\nWe'll see you at 6:30 on 9/10 in the Annenberg West Lobby!")
 
@@ -79,5 +79,18 @@ write_words(' You\'re still here? Might want to view the page source...\n')
 time.sleep(1.5)
 
 write_words('???: ')
+
+md5 = raw_input('')
+md5.strip()
+
+while md5 != '000242dc7a5257e1f265578cdcc6c3fd':
+    write_words('???: ')
+    md5 = raw_input('')
+    md5.strip()
+
+write_words('You were added to the list "TOP SECRET". We\'ll be in touch soon. Hack On.')
+
+with open('output.txt', 'a') as f:
+    f.write(name.replace(',', '')+','+email.replace(',', '')+','+str(time.time())+',true'+'\n')
 
 sys.exit(0)
