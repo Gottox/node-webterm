@@ -72,7 +72,7 @@ time.sleep(1.5)
 
 write_words('\n;)')
 
-time.sleep(20)
+time.sleep(25)
 
 write_words(' You\'re still here? Might want to view the page source...\n')
 
