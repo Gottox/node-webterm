@@ -25,16 +25,16 @@ def write_words(words, speed_min=400, speed_max=650, speed_space=0.08):
         sleeptime = random.randrange(speed_min, speed_max)
         time.sleep(float(sleeptime)/10000.0)
 
-write_words("Welcome, USC Hacker. You are invited to come to our Hacker Orientation on 9/10.")
+write_words("Welcome, USC Hacker. You are invited to come to our Hacker Orientation on 9/10.\n")
 
-write_words("\n\nT-Shirts.")
+write_words("\nT-Shirts.")
 time.sleep(0.6)
 write_words(" Waffles.")
 time.sleep(0.6)
 write_words(" Hackers.\n")
 time.sleep(0.6)
 
-write_words("You down?")
+write_words("\nYou down?")
 time.sleep(0.6)
 write_words(" Enter your full name: ")
 
@@ -64,12 +64,20 @@ while email_regex.match(email) is None:
 with open('output.txt', 'a') as f:
     f.write(name.replace(',', '')+','+email.replace(',', '')+','+str(time.time())+'\n')
 
-write_words("We'll see you at 6:30 on 9/10 in the Annenberg West Lobby!")
+write_words("\nWe'll see you at 6:30 on 9/10 in the Annenberg West Lobby!")
 
 write_words(hack_on, speed_min=10, speed_max=15, speed_space=0.001)
 
 time.sleep(1.5)
 
-write_words(';)')
+write_words('\n;)')
+
+time.sleep(5)
+
+write_words(' You\'re still here? Might want to view the page source...\n')
+
+time.sleep(1.5)
+
+write_words('???: ')
 
 sys.exit(0)
