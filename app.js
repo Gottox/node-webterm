@@ -16,9 +16,11 @@ server.on('request', function(req, res) {
 		console.log(req.url);
 		switch(req.url) {
 		case '/':
+        case '/hackon':
 		case '/index.html':
 			file = '/index.html';
 			break;
+        case '/':
         case '/favicon.ico':
             file = '/favicon.ico';
             break;
