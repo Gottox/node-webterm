@@ -17,27 +17,6 @@
 	</head>
 	<body>
 		<pre class="terminaljs" data-columns="80" data-rows="24"></pre>
-
-		<script>
-var containers = document.getElementsByClassName('terminaljs'),
-	socket = io(location.origin + '/pty'), term, stream;
-for(var i = 0; i < containers.length; i++) {
-
-	// setting tabindex makes the element focusable
-	containers[i].tabindex = 0;
-
-	// use data-* attributes to configure terminal and child_pty
-	term = new Terminal(containers[i].dataset);
-
-	// Create bidirectional stream
-	stream = ss.createStream({decodeStrings: false, encoding: 'utf-8'});
-
-	// Send stream and options to the server
-	ss(socket).emit('new', stream, containers[i].dataset);
-
-	// Connect everything up
-	stream.pipe(term).dom(containers[i]).pipe(stream);
-}
-		</script>
+		<script src="/webterm.js"></script>
 	</body>
 </html>
