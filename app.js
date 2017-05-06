@@ -5,6 +5,9 @@ var http = require('http'),
     ss = require('socket.io-stream');
 
 var config = require('./config.json');
+var use_input = true;
+if (config["input"] != null)
+  use_input = config["input"];
 
 var server = http.createServer()
 	.listen(config.port, config.interface);
@@ -43,7 +46,12 @@ socketio(server).of('pty').on('connection', function(socket) {
 		var name = options.name;
 
 		var pty = child_pty.spawn('/bin/sh', ['-c', config.login], options);
-		pty.stdout.pipe(stream).pipe(pty.stdin);
+		if (use_input)
+			pty.stdout.pipe(stream).pipe(pty.stdin);
+		else {
+			pty.stdout.pipe(stream);
+			stream.on('data', function(chunk) {});
+    }
 		ptys[name] = pty;
 		socket.on('disconnect', function() {
 			console.log("end");
