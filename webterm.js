@@ -1,5 +1,5 @@
 var containers = document.getElementsByClassName('terminaljs'),
-	socket = io('http://127.0.0.1:3000/pty'), term, stream;
+	socket = io('/pty'), term, stream;
 
 // Workaround exception on send. See https://github.com/nkzawa/socket.io-stream/issues/87.
 ss.forceBase64 = true;
