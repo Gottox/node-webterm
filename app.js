@@ -6,6 +6,18 @@ var http = require('http'),
 
 var config = require('./config.json');
 
+var fs = require('fs')
+fs.readFile('./webterm.js', 'utf8', function (err,data) {
+  if (err) {
+    return console.log(err);
+  }
+  var result = data.replace(/127.0.0.1/g, config.interface);
+  fs.writeFile('webterm.tmp.swp', result, 'utf8', function (err) {
+     if (err) return console.log(err);
+  });
+});
+
+
 var server = http.createServer()
 	.listen(config.port, config.interface);
 
@@ -20,7 +32,7 @@ server.on('request', function(req, res) {
 			file = '/index.html';
 			break;
 		case '/webterm.js':
-			file = '/webterm.js';
+			file = '/webterm.tmp.swp';
 			break;
 		case '/terminal.js':
 			file = '/node_modules/terminal.js/dist/terminal.js';
